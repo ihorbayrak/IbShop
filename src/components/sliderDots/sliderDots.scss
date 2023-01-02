@@ -1,0 +1,33 @@
+@import "../../styles/variables.scss";
+
+.slider-dots {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+
+    display: flex;
+    z-index: 5;
+}
+.slider-dot {
+    margin: 0 5px;
+    
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: $backColor;
+
+    cursor: pointer;
+
+    transition: 0.5s all;
+    &_active {
+        background: $mainColor;
+    }
+    &_small {
+        width: 10px;
+        height: 10px;
+        &_active {
+            background: $mainColor;
+        }
+    }
+}

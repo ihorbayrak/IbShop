@@ -1,0 +1,43 @@
+@import "../../../styles/variables.scss";
+
+.join {
+    padding-top: 40px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    &__title {
+        margin-bottom: 15px;
+    }
+
+    &__form {
+        padding: 50px 35px;
+
+        min-height: 520px;
+        max-width: 400px;
+
+        background-color: rgba(255, 255, 255, 0.13);
+        border-radius: 10px;
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+    }
+
+    &__already {
+        margin-top: 15px;
+        
+        font-size: 12px;
+        a {
+            color: $mainColor;
+            &:hover {
+                color: $mainColor;
+                text-decoration: underline;
+            }
+        }
+    }
+
+    &__error {
+        color: $subColor;
+    }
+}

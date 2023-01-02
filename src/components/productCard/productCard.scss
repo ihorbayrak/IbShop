@@ -1,0 +1,69 @@
+@import "../../styles/variables.scss";
+
+.product {
+    &__card {
+        background-color: #fff;
+        border-radius: 10px;
+    }
+
+    &__link {
+        width: 100%;
+        height: 330px;
+    }
+
+    &__img {
+        position: relative;
+
+        width: 100%;
+        height: 330px;
+        img {
+            position: absolute; // to place images behind each other
+
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+
+            opacity: 0;
+
+            transition: 1.5s all;
+        }
+        .current {
+            opacity: 1;
+        }
+    }
+    &__name {
+        padding: 10px;
+        text-transform: capitalize;
+    }
+
+    &__price {
+        padding: 10px;
+
+        width: 130px;
+        font-weight: 700;
+        color: $mainColor;
+        &_old {
+            font-weight: 500;
+            color: #676767;
+            text-decoration: line-through;
+        }
+    }
+
+    &__buy {
+        padding: 10px;
+        
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+
+        &-link {
+            color: $mainColor;
+
+            &:hover {
+                color: $mainColor;
+                text-decoration: underline;
+            }
+        }
+    }
+}

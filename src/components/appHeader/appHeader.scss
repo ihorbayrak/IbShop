@@ -1,0 +1,66 @@
+@import "../../styles/variables.scss";
+
+.header {
+    padding: 14px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #dddddd;
+
+    &__logo {
+        font-size: 26px;
+        width: 140px;
+        span {
+            font-weight: 700;
+            color: $mainColor;
+        }
+    }
+
+    &__catalog {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        flex: 1;
+    }
+
+    &__button {
+        padding: 15px 50px;
+    }
+}
+
+.hamburger {
+    display: none;
+    flex: 1;
+    height: 12px;
+    cursor: pointer;
+    span {
+        display: block;
+        height: 2px;
+        width: 26px;
+        background-color: #000;
+        margin-bottom: 3px;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .header {
+        &__catalog {
+            display: none;
+        }
+    }
+
+    .hamburger {
+        display: block;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .header {
+        padding: 14px;
+        &__logo {
+            font-size: 22px;
+            width: 100px;
+        }
+    }
+}

@@ -1,0 +1,79 @@
+@import "../../styles/variables.scss";
+
+.our-shop {
+    padding-top: 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 30px;
+    align-items: center;
+
+    &__info {
+        display: grid;
+        place-content: center;
+    }
+
+    &__descr {
+        margin-top: 20px;
+        font-weight: 400;
+        font-size: 20px;
+        color: #343434;
+    }
+
+    &__qualities {
+        margin-top: 40px;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, 305px);
+        justify-content: space-between;
+        row-gap: 20px;
+    }
+
+    &__block {
+        display: grid;
+        justify-content: space-between;
+        grid-template-columns: 40px auto;
+        &-icon {
+            svg {
+                font-size: 30px;
+                color: $mainColor;
+            }
+        }
+        &-head {
+            font-weight: 700;
+            font-size: 17px;
+            color: #2b2a2a;
+        }
+        &-body {
+            margin-top: 10px;
+            font-weight: 400;
+            color: #676767;
+        }
+    }
+
+    &__button {
+        padding: 18px 54px;
+        margin: 50px auto;
+    }
+
+    &__img {
+        width: 100%;
+        height: 550px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img {
+            max-width: 100%;
+            min-height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .our-shop {
+        display: block;
+        &__img {
+            display: none;
+        }
+    }
+}
