@@ -19,7 +19,7 @@ const Slider = () => {
 
     const nextSlide = () => {
         if (slideIndex !== imgArr.length - 1) {
-            setSlideIndex(slideIndex + 1);
+            setSlideIndex(prevState => prevState + 1);
         }
 
         if (slideIndex === imgArr.length - 1) {
@@ -29,7 +29,7 @@ const Slider = () => {
 
     const prevSlide = () => {
         if (slideIndex !== 0) {
-            setSlideIndex(slideIndex - 1);
+            setSlideIndex(prevState => prevState - 1);
         }
 
         if (slideIndex === 0) {

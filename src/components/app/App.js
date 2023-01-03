@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, lazy, Suspense } from 'react';
 
 import {
     onAuthStateChangedListener,
@@ -10,23 +10,25 @@ import { setCurrentUser, removeCurrentUser } from '../../utils/reducers/authSlic
 import { Route, Routes } from 'react-router-dom';
 
 import AppFooter from '../appFooter/AppFooter';
-import AppHeader from '../appHeader/AppHeader';
 import HomePage from '../pages/homePage/HomePage';
 import DeliveryPage from '../pages/deliveryPage/DeliveryPage';
 import ContactsPage from '../pages/contactsPage/ContactsPage';
 import CatalogPage from '../pages/catalogPage/CatalogPage';
-import ShopPage from '../pages/shopPage/ShopPage';
 import SingleProductPage from '../pages/singleProductPage/SingleProductPage';
 import CheckoutPage from '../pages/checkoutPage/CheckoutPage';
 import SignInPage from '../pages/signInPage/SignInPage';
 import JoinPage from '../pages/joinPage/JoinPage';
-import Page404 from '../pages/404/Page404';
+import Spinner from '../spinner/Spinner';
+
+const ShopPage = lazy(() => import('../pages/shopPage/ShopPage'));
+const Page404 = lazy(() => import('../pages/404/Page404'));
+const AppHeader = lazy(() => import('../appHeader/AppHeader'));
 
 const App = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        onAuthStateChangedListener((user) => {
+        const unsubscribe = onAuthStateChangedListener((user) => {
             if (user) {
                 const { displayName, email, uid } = user;
 
@@ -44,27 +46,31 @@ const App = () => {
                 dispatch(removeCurrentUser());
             }
         });
+
+        return unsubscribe;
     }, []);
 
     return (
         <div className='app'>
-            <Routes>
-                <Route path='/' element={<AppHeader />}>
-                    <Route index element={<HomePage />} />
-                    <Route path='delivery' element={<DeliveryPage />} />
-                    <Route path='contacts' element={<ContactsPage />} />
-                    <Route path='catalog' element={<CatalogPage />} />
-                    <Route path='shop/:category' element={<ShopPage />} />
-                    <Route path='shop/:category/:product' element={<SingleProductPage />} />
-                    <Route path='checkout' element={<CheckoutPage />} />
-                    <Route path='*' element={<Page404 />} />
-                </Route>
+            <Suspense fallback={<Spinner />}>
+                <Routes>
+                    <Route path='/' element={<AppHeader />}>
+                        <Route index element={<HomePage />} />
+                        <Route path='delivery' element={<DeliveryPage />} />
+                        <Route path='contacts' element={<ContactsPage />} />
+                        <Route path='catalog' element={<CatalogPage />} />
+                        <Route path='shop/:category' element={<ShopPage />} />
+                        <Route path='shop/:category/:product' element={<SingleProductPage />} />
+                        <Route path='checkout' element={<CheckoutPage />} />
+                        <Route path='*' element={<Page404 />} />
+                    </Route>
 
-                <Route path='/authentication/sign-in' element={<SignInPage />} />
-                <Route path='/authentication/join' element={<JoinPage />} />
-            </Routes>
+                    <Route path='/authentication/sign-in' element={<SignInPage />} />
+                    <Route path='/authentication/join' element={<JoinPage />} />
+                </Routes>
 
-            <AppFooter />
+                <AppFooter />
+            </Suspense>
         </div>
     );
 };
