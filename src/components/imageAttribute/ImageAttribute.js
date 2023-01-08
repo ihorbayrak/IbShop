@@ -1,18 +1,22 @@
-import './imageAttribute.scss';
+import { Attribute } from './style.js';
 
 const ImageAttribute = ({ attributeProps }) => {
     const { latest, popular, discount } = attributeProps;
 
     if (latest) {
-        return <div className='image-attribute image-attribute_yellow'>Latest</div>;
+        return (
+            <Attribute bgColor='latestColor' customColor>
+                Latest
+            </Attribute>
+        );
     }
 
     if (popular) {
-        return <div className='image-attribute image-attribute_purple'>Top sales</div>;
+        return <Attribute bgColor='topColor'>Top sales</Attribute>;
     }
 
     if (discount) {
-        return <div className='image-attribute image-attribute_red'>-{discount}%</div>;
+        return <Attribute bgColor='subColor'>-{discount}%</Attribute>;
     }
 };
 

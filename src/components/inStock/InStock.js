@@ -6,13 +6,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
     fetchCategories,
     categoriesInStockSelector,
-} from '../../utils/reducers/categoriesSlice/categoriesSlice';
+} from '../../redux/reducers/categoriesSlice/categoriesSlice';
 
 import ProductCard from '../productCard/ProductCard';
 
 import { setContent } from '../../utils/functions/functions';
 
-import './inStock.scss';
+import { InStockSection, InStockList, InStockLink } from './style.js';
+import { Title } from '../../styles/Titles';
 
 const InStock = () => {
     const { categoriesLoadingStatus } = useSelector((state) => state.categories);
@@ -36,15 +37,15 @@ const InStock = () => {
     }, [categoriesLoadingStatus]);
 
     return (
-        <section className='in-stock'>
-            <h2 className='title'>In Stock</h2>
+        <InStockSection>
+            <Title fz='large'>In Stock</Title>
 
-            <ul className='in-stock__list'>{elements}</ul>
+            <InStockList>{elements}</InStockList>
 
-            <div className='in-stock__link'>
+            <InStockLink>
                 <Link to='/catalog'>Go to catalog</Link>
-            </div>
-        </section>
+            </InStockLink>
+        </InStockSection>
     );
 };
 

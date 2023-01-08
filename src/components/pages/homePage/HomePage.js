@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import InfoBlock from '../../infoBlock/InfoBlock';
 import InfoBlocksList from '../../infoBlocksList/InfoBlocksList';
@@ -6,7 +6,9 @@ import InStock from '../../inStock/InStock';
 import OurShop from '../../ourShop/OurShop';
 import Slider from '../../slider/Slider';
 
-import './homePage.scss';
+import { AboutSection, ShippingSection, ShippingLinkContainer, ShippingSubtitle } from './style.js';
+import { StyledButton } from '../../../styles/Buttons';
+import { Title } from '../../../styles/Titles';
 
 const infoBlockData = [
     {
@@ -32,19 +34,27 @@ const infoBlockData = [
 ];
 
 const HomePage = () => {
+    const navigate = useNavigate();
+
     return (
         <>
             <OurShop />
             <InStock />
 
-            <section className='about'>
-                <h2 className='title title_center'>What people write about us</h2>
-                <Slider />
-            </section>
+            <AboutSection>
+                <Title fz='large' centered>
+                    What people write about us
+                </Title>
 
-            <section className='shipping'>
-                <h2 className='title title_center'>Delivery with postpaid</h2>
-                <div className='shipping__subtitle'>Simple and easy</div>
+                <Slider />
+            </AboutSection>
+
+            <ShippingSection>
+                <Title fz='large' centered>
+                    Delivery with postpaid
+                </Title>
+
+                <ShippingSubtitle>Simple and easy</ShippingSubtitle>
 
                 <InfoBlocksList>
                     {infoBlockData.map((info, index) => {
@@ -52,12 +62,16 @@ const HomePage = () => {
                     })}
                 </InfoBlocksList>
 
-                <div className='shipping__link'>
-                    <Link to='/catalog' className='button shipping__button'>
+                <ShippingLinkContainer>
+                    <StyledButton
+                        modifier='primary'
+                        btnPadding='20px 40px'
+                        onClick={() => navigate('/catalog')}
+                    >
                         Go to catalog
-                    </Link>
-                </div>
-            </section>
+                    </StyledButton>
+                </ShippingLinkContainer>
+            </ShippingSection>
         </>
     );
 };

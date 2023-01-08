@@ -1,7 +1,7 @@
-import './infoBlocksList.scss';
+import { Container } from './style.js';
 
 const infoBlocksList = (props) => {
-    return <ul className='info-block__list'>{props.children}</ul>;
+    return <Container>{props.children}</Container>;
 };
 
 export default infoBlocksList;

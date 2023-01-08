@@ -2,12 +2,20 @@ import { useState } from 'react';
 
 import { formatPrice } from '../../utils/functions/functions';
 
-import { Link } from 'react-router-dom';
 import SliderDots from '../sliderDots/SliderDots';
 import ImageAttribute from '../imageAttribute/ImageAttribute';
 import CartButton from '../cartButton/CartButton';
 
-import './productCard.scss';
+import {
+    ProductCardContainer,
+    ProductCardImg,
+    ProductCardLink,
+    ProductCardName,
+    ProductCardPrice,
+    ProductBuy,
+    SlideCardImg,
+    BuyLink,
+} from './style.js';
 
 const ProductCard = ({ product, category }) => {
     const { name, price, imageUrl, latest, popular, discount } = product;
@@ -24,26 +32,28 @@ const ProductCard = ({ product, category }) => {
         if (discount) {
             return (
                 <>
-                    <div className='product__price'>
+                    <ProductCardPrice>
                         {formatPrice(price, discount).toFixed(2)}$
-                        <span className='product__price product__price_old'>{price}$</span>
-                    </div>
+                        <ProductCardPrice as='span' isOld>
+                            {price}$
+                        </ProductCardPrice>
+                    </ProductCardPrice>
                 </>
             );
         }
 
-        return <div className='product__price'>{price}$</div>;
+        return <ProductCardPrice>{price}$</ProductCardPrice>;
     };
 
     return (
-        <li className='product__card'>
-            <div className='product__img'>
-                <Link to={`/shop/${category}/${name}`} className='product__link'>
+        <ProductCardContainer>
+            <ProductCardImg>
+                <ProductCardLink to={`/shop/${category}/${name}`}>
                     {imgArr.map((imgSrc, index) => {
                         return (
-                            <img
+                            <SlideCardImg
+                                current={slideIndex === index}
                                 key={index}
-                                className={slideIndex === index ? 'current' : null}
                                 src={imgSrc}
                                 alt={name}
                             />
@@ -51,24 +61,26 @@ const ProductCard = ({ product, category }) => {
                     })}
 
                     <ImageAttribute attributeProps={{ latest, popular, discount }} />
-                </Link>
+                </ProductCardLink>
 
                 <SliderDots
                     imgArr={imgArr}
                     slideIndex={slideIndex}
                     onChangeDot={onChangeDot}
-                    additionalClass={'_small'}
+                    isSmall
                 />
-            </div>
+            </ProductCardImg>
 
-            <div className='product__name'>{name}</div>
+            <ProductCardName>{name}</ProductCardName>
+
             <div className='product__prices'>{displayPrice()}</div>
 
-            <div className='product__buy'>
+            <ProductBuy>
                 <CartButton product={product} />
-                <Link className='product__buy-link'>Buy now</Link>
-            </div>
-        </li>
+
+                <BuyLink>Buy now</BuyLink>
+            </ProductBuy>
+        </ProductCardContainer>
     );
 };
 

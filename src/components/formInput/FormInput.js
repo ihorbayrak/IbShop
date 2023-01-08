@@ -1,20 +1,16 @@
 import { useForm } from 'react-hook-form';
 
-import './formInput.scss';
+import { StyledInput, StyledLabel, InputContainer } from './style.js';
 
 const FormInput = ({ id, label, ...otherProps }) => {
     const { register } = useForm();
 
     return (
-        <div className='input__container'>
-            {label && (
-                <label htmlFor={id} className='input__label'>
-                    {label}
-                </label>
-            )}
+        <InputContainer>
+            {label && <StyledLabel htmlFor={id}>{label}</StyledLabel>}
 
-            <input id={id} className='input' {...otherProps} {...register(otherProps.name)} />
-        </div>
+            <StyledInput id={id} {...otherProps} {...register(otherProps.name)} />
+        </InputContainer>
     );
 };
 

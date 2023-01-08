@@ -1,11 +1,14 @@
 import { useEffect, lazy, Suspense } from 'react';
 
+import { ThemeProvider } from 'styled-components';
+import { theme } from '../../styles/theme';
+
 import {
     onAuthStateChangedListener,
     createUserDocumentFromAuth,
 } from '../../utils/firebase/firebase';
 import { useDispatch } from 'react-redux';
-import { setCurrentUser, removeCurrentUser } from '../../utils/reducers/authSlice/authSlice';
+import { setCurrentUser, removeCurrentUser } from '../../redux/reducers/authSlice/authSlice';
 
 import { Route, Routes } from 'react-router-dom';
 
@@ -51,27 +54,29 @@ const App = () => {
     }, []);
 
     return (
-        <div className='app'>
-            <Suspense fallback={<Spinner />}>
-                <Routes>
-                    <Route path='/' element={<AppHeader />}>
-                        <Route index element={<HomePage />} />
-                        <Route path='delivery' element={<DeliveryPage />} />
-                        <Route path='contacts' element={<ContactsPage />} />
-                        <Route path='catalog' element={<CatalogPage />} />
-                        <Route path='shop/:category' element={<ShopPage />} />
-                        <Route path='shop/:category/:product' element={<SingleProductPage />} />
-                        <Route path='checkout' element={<CheckoutPage />} />
-                        <Route path='*' element={<Page404 />} />
-                    </Route>
+        <ThemeProvider theme={theme}>
+            <div className='app'>
+                <Suspense fallback={<Spinner />}>
+                    <Routes>
+                        <Route path='/' element={<AppHeader />}>
+                            <Route index element={<HomePage />} />
+                            <Route path='delivery' element={<DeliveryPage />} />
+                            <Route path='contacts' element={<ContactsPage />} />
+                            <Route path='catalog' element={<CatalogPage />} />
+                            <Route path='shop/:category' element={<ShopPage />} />
+                            <Route path='shop/:category/:product' element={<SingleProductPage />} />
+                            <Route path='checkout' element={<CheckoutPage />} />
+                            <Route path='*' element={<Page404 />} />
+                        </Route>
 
-                    <Route path='/authentication/sign-in' element={<SignInPage />} />
-                    <Route path='/authentication/join' element={<JoinPage />} />
-                </Routes>
+                        <Route path='/authentication/sign-in' element={<SignInPage />} />
+                        <Route path='/authentication/join' element={<JoinPage />} />
+                    </Routes>
 
-                <AppFooter />
-            </Suspense>
-        </div>
+                    <AppFooter />
+                </Suspense>
+            </div>
+        </ThemeProvider>
     );
 };
 

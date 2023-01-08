@@ -3,12 +3,12 @@ import {
     toggleCartDropdown,
     amountCartItemsSelector,
     totalCostSelector,
-} from '../../utils/reducers/cartSlice/cartSlice';
+} from '../../redux/reducers/cartSlice/cartSlice';
 
 import CartDropdown from '../cartDropdown/CartDropdown';
 import { BsCart4 } from 'react-icons/bs';
 
-import './cartIcon.scss';
+import { CartContainer, CartTotal, CartCounter } from './style.js';
 
 const CartIcon = () => {
     const { isCartOpen } = useSelector((state) => state.cart);
@@ -17,13 +17,14 @@ const CartIcon = () => {
     const dispatch = useDispatch();
 
     return (
-        <div className='cart'>
+        <CartContainer>
             <BsCart4 onClick={() => dispatch(toggleCartDropdown())} />
             {isCartOpen && <CartDropdown />}
 
-            <div className='cart__counter'>{amount}</div>
-            <div className='cart__total'>{total.toFixed(2)} $</div>
-        </div>
+            <CartCounter>{amount}</CartCounter>
+
+            <CartTotal>{total.toFixed(2)} $</CartTotal>
+        </CartContainer>
     );
 };
 

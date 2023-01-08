@@ -1,25 +1,17 @@
 import { useSelector } from 'react-redux';
 
-import { NavLink } from 'react-router-dom';
 import HamburgerMenu from '../hamburgerMenu/HamburgerMenu';
 
-import './navBar.scss';
+import { NavBarContainer, NavBarMenu, NavBarLink } from './style.js';
 
 const NavBar = () => {
     const { linksData, hamburgerMenuActive } = useSelector((state) => state.navBar);
-
-    let activeClassName = 'nav-bar__link nav-bar__link_active';
 
     const renderLinks = (arr) => {
         return arr.map(({ id, label, route }) => {
             return (
                 <li key={id}>
-                    <NavLink
-                        to={`${route}`}
-                        className={({ isActive }) => (isActive ? activeClassName : 'nav-bar__link')}
-                    >
-                        {label}
-                    </NavLink>
+                    <NavBarLink to={`${route}`}>{label}</NavBarLink>
                 </li>
             );
         });
@@ -28,11 +20,11 @@ const NavBar = () => {
     const elements = renderLinks(linksData);
 
     return (
-        <nav className='nav-bar'>
-            <ul className='nav-bar__menu'>{elements}</ul>
+        <NavBarContainer>
+            <NavBarMenu>{elements}</NavBarMenu>
 
             {hamburgerMenuActive && <HamburgerMenu />}
-        </nav>
+        </NavBarContainer>
     );
 };
 

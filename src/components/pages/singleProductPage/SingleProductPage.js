@@ -8,14 +8,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
     categoriesMapSelector,
     fetchCategories,
-} from '../../../utils/reducers/categoriesSlice/categoriesSlice';
+} from '../../../redux/reducers/categoriesSlice/categoriesSlice';
 
 import ImageAttribute from '../../imageAttribute/ImageAttribute';
 import CartButton from '../../cartButton/CartButton';
 import Spinner from '../../spinner/Spinner';
 import ErrorMessage from '../../errorMessage/ErrorMessage';
 
-import './singleProductPage.scss';
+import { ProductSection, ProductImg, ProductInfo } from './style.js';
+import { ProductCardPrice } from '../../productCard/style';
 
 const SingleProductPage = () => {
     const { category, product } = useParams();
@@ -40,36 +41,38 @@ const SingleProductPage = () => {
         infoAboutProduct = productInfo[category].find((item) => item.name === product);
     }
 
-    const { name, imageUrl, discount, popular, latest, price, quantity } = infoAboutProduct;
+    const { name, imageUrl, discount, popular, latest, price } = infoAboutProduct;
 
     const displayPrice = () => {
         if (discount) {
             return (
                 <>
-                    <div className='product__price product__price_big'>
+                    <ProductCardPrice isBig>
                         {formatPrice(price, discount).toFixed(2)}$
-                        <span className='product__price product__price_old'>{price}$</span>
-                    </div>
+                        <ProductCardPrice isOld as='span'>
+                            {price}$
+                        </ProductCardPrice>
+                    </ProductCardPrice>
                 </>
             );
         }
 
-        return <div className='product__price product__price_big'>{price}$</div>;
+        return <ProductCardPrice isBig>{price}$</ProductCardPrice>;
     };
 
     return (
-        <section className='product'>
+        <ProductSection>
             <div className='product__specific'>
                 <h2 className='title title_medium'>{name}</h2>
 
-                <div className='product__pic'>
+                <ProductImg>
                     <img src={imageUrl} alt={name} />
 
                     <ImageAttribute attributeProps={{ discount, popular, latest }} />
-                </div>
+                </ProductImg>
             </div>
 
-            <div className='product__info'>
+            <ProductInfo>
                 <div className='product__descr'>
                     Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vel eligendi
                     repellendus nulla inventore delectus molestiae quam. Incidunt, velit ea rem,
@@ -81,8 +84,8 @@ const SingleProductPage = () => {
                 <div className='product__prices'>{displayPrice()}</div>
 
                 <CartButton product={infoAboutProduct} />
-            </div>
-        </section>
+            </ProductInfo>
+        </ProductSection>
     );
 };
 

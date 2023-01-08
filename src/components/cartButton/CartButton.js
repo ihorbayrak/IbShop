@@ -1,12 +1,13 @@
 import { useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { addItemToCart } from '../../utils/reducers/cartSlice/cartSlice';
+import { addItemToCart } from '../../redux/reducers/cartSlice/cartSlice';
+
+import Modal from '../modal/Modal';
 
 import { BsCart4 } from 'react-icons/bs';
 
-import './cartButton.scss';
-import Modal from '../modal/Modal';
+import { StyledButton } from '../../styles/Buttons';
 
 const CartButton = ({ product }) => {
     const [modalActive, setModalActive] = useState(false);
@@ -26,9 +27,9 @@ const CartButton = ({ product }) => {
 
     return (
         <>
-            <button className='button cart-button' onClick={handleClick}>
+            <StyledButton modifier='cart' onClick={handleClick}>
                 Add to cart <BsCart4 />
-            </button>
+            </StyledButton>
 
             <Modal active={modalActive} setActive={setModalActive}>
                 <p>Please sign in</p>

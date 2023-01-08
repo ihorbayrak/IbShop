@@ -1,9 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { totalCostSelector, clearItemsFromCart } from '../../../utils/reducers/cartSlice/cartSlice';
+import { totalCostSelector, clearItemsFromCart } from '../../../redux/reducers/cartSlice/cartSlice';
 
 import CheckoutItem from '../../checkoutItem/CheckoutItem';
 
-import './checkoutPage.scss';
+import { CheckoutWrapper, CheckoutList, CheckoutInfo, CheckoutTotal } from './style.js';
+import { StyledButton } from '../../../styles/Buttons';
+import { Title } from '../../../styles/Titles';
 
 const CheckoutPage = () => {
     const { isLoggedIn } = useSelector((state) => state.auth);
@@ -26,26 +28,30 @@ const CheckoutPage = () => {
 
     return (
         <section className='checkout'>
-            <h2 className='title title_center'>checkout</h2>
-            <button className='button button_clear' onClick={() => dispatch(clearItemsFromCart())}>
+            <Title fz='large' centered>
+                checkout
+            </Title>
+            <StyledButton modifier='clear' onClick={() => dispatch(clearItemsFromCart())}>
                 Clear all
-            </button>
+            </StyledButton>
 
-            <div className='checkout__wrapper'>
-                <ul className='checkout__list'>
+            <CheckoutWrapper>
+                <CheckoutList>
                     {elements.length === 0 ? <span>You haven't added products yet</span> : elements}
-                </ul>
+                </CheckoutList>
 
-                <div className='checkout__buy-info'>
-                    <div className='checkout__total'>
+                <CheckoutInfo>
+                    <CheckoutTotal>
                         Total: <span>${total.toFixed(2)}</span>
-                    </div>
+                    </CheckoutTotal>
 
                     {elements.length !== 0 && (
-                        <button className='button checkout__button'>Buy</button>
+                        <StyledButton modifier='primary' btnMargin='15px 0 0 0'>
+                            Buy
+                        </StyledButton>
                     )}
-                </div>
-            </div>
+                </CheckoutInfo>
+            </CheckoutWrapper>
         </section>
     );
 };

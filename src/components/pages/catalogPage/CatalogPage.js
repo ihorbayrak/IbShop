@@ -1,6 +1,6 @@
 import CategoryItem from '../../categoryItem/CategoryItem';
 
-import './catalogPage.scss';
+import { CatalogSection, CatalogContainer } from './style.js';
 
 const categories = [
     {
@@ -37,13 +37,13 @@ const categories = [
 
 const CatalogPage = () => {
     return (
-        <section className='catalog'>
-            <ul className='catalog__container'>
+        <CatalogSection>
+            <CatalogContainer>
                 {categories.map((category) => {
                     return <CategoryItem key={category.id} category={category} />;
                 })}
-            </ul>
-        </section>
+            </CatalogContainer>
+        </CatalogSection>
     );
 };
 

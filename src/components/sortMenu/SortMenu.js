@@ -1,7 +1,8 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { sortByChanged } from '../../utils/reducers/sortSlice/sortSlice';
+import { sortByChanged } from '../../redux/reducers/sortSlice/sortSlice';
 
-import './sortMenu.scss';
+import { SortContainer, SelectMenu } from './style.js';
+import { Title } from '../../styles/Titles';
 
 const SortMenu = () => {
     const { options } = useSelector((state) => state.sort);
@@ -20,17 +21,15 @@ const SortMenu = () => {
     const elements = renderOptions(options);
 
     return (
-        <div className='sort'>
-            <div className='title title_small'>Sort by:</div>
+        <SortContainer>
+            <Title fz='semi'>Sort by:</Title>
 
-            <select
-                className='sort__menu'
-                onChange={(e) => dispatch(sortByChanged(e.target.value))}
-            >
+            <SelectMenu onChange={(e) => dispatch(sortByChanged(e.target.value))}>
                 <option defaultValue='choose'>Choose</option>
+
                 {elements}
-            </select>
-        </div>
+            </SelectMenu>
+        </SortContainer>
     );
 };
 

@@ -1,20 +1,22 @@
 import { formatPrice } from '../../utils/functions/functions';
 
-import './cartProduct.scss';
+import { CartProductContainer, CartProductInfo } from './style.js';
 
 const CartProduct = ({ cartItem }) => {
     const { name, imageUrl, price, discount, quantity } = cartItem;
 
     return (
-        <div className='cart__product'>
+        <CartProductContainer>
             <img src={imageUrl} alt={name} />
-            <div className='cart__product-info'>
-                <div className='cart__product-name'>{name}</div>
+
+            <CartProductInfo>
+                <div>{name}</div>
+
                 <span>
                     {quantity} x ${formatPrice(price, discount).toFixed(2)}
                 </span>
-            </div>
-        </div>
+            </CartProductInfo>
+        </CartProductContainer>
     );
 };
 

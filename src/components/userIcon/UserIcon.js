@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 
 import { AiOutlineUser } from 'react-icons/ai';
 
-import './userIcon.scss';
+import { UserContainer, UserMenu, UserMenuItem } from './style.js';
 
 const UserIcon = () => {
     const { authUser, isLoggedIn } = useSelector((state) => state.auth);
@@ -23,12 +23,12 @@ const UserIcon = () => {
         if (isLoggedIn) {
             return (
                 <>
-                    <li className='user__menu-item user__menu-item_logged'>
+                    <UserMenuItem isLogged>
                         {authUser.displayName}
-                    </li>
-                    <li className='user__menu-item' onClick={signOutUser}>
+                    </UserMenuItem>
+                    <UserMenuItem onClick={signOutUser}>
                         Sign Out
-                    </li>
+                    </UserMenuItem>
                 </>
             );
         }
@@ -48,14 +48,14 @@ const UserIcon = () => {
     };
 
     return (
-        <div className='user'>
+        <UserContainer>
             <AiOutlineUser onClick={onActiveMenu} />
             {isMenuActive && (
-                <div className='user__menu'>
+                <UserMenu>
                     <ul>{setUserMenuItems()}</ul>
-                </div>
+                </UserMenu>
             )}
-        </div>
+        </UserContainer>
     );
 };
 

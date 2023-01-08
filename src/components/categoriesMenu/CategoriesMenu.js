@@ -6,11 +6,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
     fetchCategories,
     categoriesKeysSelector,
-} from '../../utils/reducers/categoriesSlice/categoriesSlice';
+} from '../../redux/reducers/categoriesSlice/categoriesSlice';
 
 import { setContent } from '../../utils/functions/functions';
 
-import './categoriesMenu.scss';
+import {
+    CategoriesContainer,
+    CategoriesTitle,
+    CategoriesList,
+    CategoriesItem,
+    StyledNavLink,
+} from './style';
 
 const CategoriesMenu = () => {
     const { categoriesLoadingStatus } = useSelector((state) => state.categories);
@@ -21,19 +27,12 @@ const CategoriesMenu = () => {
         dispatch(fetchCategories());
     }, []);
 
-    let activeClassName = 'categories__item categories__item_active';
-
     const renderCategoryName = (arr) => {
         return arr.map((categoryName) => {
             return (
-                <li key={categoryName} className='categories__item'>
-                    <NavLink
-                        to={`/shop/${categoryName}`}
-                        className={({ isActive }) => (isActive ? activeClassName : null)}
-                    >
-                        {categoryName}
-                    </NavLink>
-                </li>
+                <CategoriesItem key={categoryName}>
+                    <StyledNavLink to={`/shop/${categoryName}`}>{categoryName}</StyledNavLink>
+                </CategoriesItem>
             );
         });
     };
@@ -43,11 +42,11 @@ const CategoriesMenu = () => {
     }, [categoriesLoadingStatus]);
 
     return (
-        <aside className='categories'>
-            <div className='categories__title'>Categories</div>
+        <CategoriesContainer>
+            <CategoriesTitle>Categories</CategoriesTitle>
 
-            <ul className='categories__menu'>{elements}</ul>
-        </aside>
+            <CategoriesList>{elements}</CategoriesList>
+        </CategoriesContainer>
     );
 };
 

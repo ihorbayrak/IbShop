@@ -5,30 +5,34 @@ import ProductFilters from '../../productFilters/ProductFilters';
 import ProductsList from '../../productsList/ProductsList';
 import SortMenu from '../../sortMenu/SortMenu';
 
-import './shopPage.scss';
+import { ShopSection, ShopOptions, ShopFilters } from './style.js';
+import { Title } from '../../../styles/Titles';
 
 const ShopPage = () => {
     const { category } = useParams();
 
     return (
-        <section className='shop'>
+        <ShopSection>
             <div className='shop__categories'>
-                <h2 className='title shop__title'>{category}</h2>
+                <Title fz='large'>{category}</Title>
+
                 <CategoriesMenu />
             </div>
+
             <div className='shop__content'>
-                <div className='shop__options'>
+                <ShopOptions>
                     <SortMenu />
 
-                    <div className='shop__filters'>
-                        <div className='title title_small'>FIlter products:</div>
+                    <ShopFilters>
+                        <Title fz='semi'>FIlter products:</Title>
+
                         <ProductFilters />
-                    </div>
-                </div>
+                    </ShopFilters>
+                </ShopOptions>
 
                 <ProductsList category={category} />
             </div>
-        </section>
+        </ShopSection>
     );
 };
 

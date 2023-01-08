@@ -3,7 +3,8 @@ import CartProduct from '../cartProduct/CartProduct';
 
 import { useSelector } from 'react-redux';
 
-import './cartDropdown.scss';
+import { CartDropdownMenu, CartItems } from './style.js';
+import { StyledButton } from '../../styles/Buttons';
 
 const CartDropdown = () => {
     const { cartItems } = useSelector((state) => state.cart);
@@ -22,14 +23,15 @@ const CartDropdown = () => {
     const elements = renderCartItems(cartItems);
 
     return (
-        <div className='cart__dropdown'>
-            <ul className='cart__items'>
+        <CartDropdownMenu>
+            <CartItems>
                 {elements.length === 0 ? <span>Your cart is empty </span> : elements}
-            </ul>
-            <Link to='/checkout' className='button cart__button'>
-                Go to checkout
-            </Link>
-        </div>
+            </CartItems>
+
+            <StyledButton modifier='primary' btnPadding='10px' btnMargin='auto'>
+                <Link to='/checkout'>Go to checkout</Link>
+            </StyledButton>
+        </CartDropdownMenu>
     );
 };
 

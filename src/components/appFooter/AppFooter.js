@@ -7,69 +7,91 @@ import {
     AiOutlineTwitter,
 } from 'react-icons/ai';
 
-import './appFooter.scss';
+import {
+    FooterContainer,
+    FooterWrapper,
+    FooterFlexContainer,
+    FooterInfo,
+    FooterDescription,
+    FooterTitle,
+    FooterSocials,
+    FooterSocialIcon,
+} from './style';
 
 const AppFooter = () => {
     return (
-        <footer className='footer'>
-            <div className='footer__wrapper'>
-                <div className='footer__contacts'>
-                    <div className='footer__title'>Contacts</div>
+        <FooterContainer>
+            <FooterWrapper>
+                <FooterFlexContainer justifyCenter='center'>
+                    <FooterTitle>Contacts</FooterTitle>
 
-                    <div className='footer__contacts-info'>
-                        <div className='footer__contacts-icon'>
+                    <FooterInfo>
+                        <div>
                             <GoLocation />
                         </div>
-                        <div className='footer__contacts-descr'>
-                            <span>Our address</span> Fort Lee 2536 West Side Avenue New Jersey
-                        </div>
-                    </div>
 
-                    <div className='footer__contacts-info'>
-                        <div className='footer__contacts-icon'>
+                        <FooterDescription>
+                            <span>Our address</span> Fort Lee 2536 West Side Avenue New Jersey
+                        </FooterDescription>
+                    </FooterInfo>
+
+                    <FooterInfo>
+                        <div>
                             <AiOutlinePhone />
                         </div>
-                        <div className='footer__contacts-descr'>
+
+                        <FooterDescription>
                             <span>Our phone</span>
                             <a href='tel:+88993888655'>8 (899) 38-88-655</a>
-                        </div>
-                    </div>
+                        </FooterDescription>
+                    </FooterInfo>
 
-                    <div className='footer__contacts-info'>
-                        <div className='footer__contacts-icon'>
+                    <FooterInfo>
+                        <div>
                             <AiOutlineMail />
                         </div>
-                        <div className='footer__contacts-descr'>
+
+                        <FooterDescription>
                             <span>Our email</span>
                             <a href='mailto: info@gmail.com'>info@gmail.com</a>
-                        </div>
-                    </div>
-                </div>
+                        </FooterDescription>
+                    </FooterInfo>
+                </FooterFlexContainer>
 
-                <div className='footer__about'>
-                    <div className='footer__title'>About shop</div>
-                    <p className='footer__about-descr'>
+                <FooterFlexContainer>
+                    <FooterTitle>About shop</FooterTitle>
+                    <p className='footer__about'>
                         Shop ImageCMS Shop offers a huge selection of equipment to suit all tastes
                         at the best prices. Our store has more than 5 years and during that time
                         there was not a single return of the goods. We serve hundreds of customers
                         every day and do it with joy. Buy equipment from us and become the owner of
                         the worlds best technology !!!
                     </p>
-                </div>
+                </FooterFlexContainer>
 
-                <div className='footer__socials'>
-                    <a href='https://www.facebook.com' className='footer__socials-facebook'>
+                <FooterSocials>
+                    <FooterSocialIcon
+                        href='https://www.facebook.com'
+                        marginRight='15px'
+                        iconColor='rgb(49, 49, 174)'
+                    >
                         <AiOutlineFacebook />
-                    </a>
-                    <a href='https://www.instagram.com' className='footer__socials-inst'>
+                    </FooterSocialIcon>
+
+                    <FooterSocialIcon
+                        href='https://www.instagram.com'
+                        marginRight='15px'
+                        iconColor='rgb(170, 59, 187)'
+                    >
                         <AiOutlineInstagram />
-                    </a>
-                    <a href='https://twitter.com' className='footer__socials-twitter'>
+                    </FooterSocialIcon>
+
+                    <FooterSocialIcon href='https://twitter.com' iconColor='rgb(59, 121, 187)'>
                         <AiOutlineTwitter />
-                    </a>
-                </div>
-            </div>
-        </footer>
+                    </FooterSocialIcon>
+                </FooterSocials>
+            </FooterWrapper>
+        </FooterContainer>
     );
 };
 

@@ -1,27 +1,19 @@
 import { useDispatch } from 'react-redux';
-import { addItemToCart, removeItemFromCart } from '../../utils/reducers/cartSlice/cartSlice';
+import { addItemToCart, removeItemFromCart } from '../../redux/reducers/cartSlice/cartSlice';
 
-import './amountCounter.scss';
+import { AmountContainer, AmountValue } from './style';
 
 const AmountCounter = ({ cartItem }) => {
     const dispatch = useDispatch();
 
     return (
-        <div className='amount-counter'>
-            <button
-                className='amount-counter__button'
-                onClick={() => dispatch(removeItemFromCart(cartItem))}
-            >
-                -
-            </button>
-            <div className='amount-counter__value'>{cartItem.quantity}</div>
-            <button
-                className='amount-counter__button'
-                onClick={() => dispatch(addItemToCart(cartItem))}
-            >
-                +
-            </button>
-        </div>
+        <AmountContainer>
+            <button onClick={() => dispatch(removeItemFromCart(cartItem))}>-</button>
+
+            <AmountValue>{cartItem.quantity}</AmountValue>
+
+            <button onClick={() => dispatch(addItemToCart(cartItem))}>+</button>
+        </AmountContainer>
     );
 };
 

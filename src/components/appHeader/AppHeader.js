@@ -1,55 +1,49 @@
 import { useDispatch } from 'react-redux';
-import { toggleHamburgerMenu } from '../../utils/reducers/navBarSlice/navBarSlice';
+import { toggleHamburgerMenu } from '../../redux/reducers/navBarSlice/navBarSlice';
 
-import { Link, NavLink, Outlet } from 'react-router-dom';
+import { Link, useNavigate, Outlet } from 'react-router-dom';
 
 import CartIcon from '../cartIcon/CartIcon';
 import NavBar from '../navBar/NavBar';
 import Attention from '../attention/Attention';
 import UserIcon from '../userIcon/UserIcon';
 
-import './appHeader.scss';
+import { HeaderContainer, HeaderLogo, HeaderCatalog, Hamburger } from './style';
+import { StyledButton } from '../../styles/Buttons';
 
 const AppHeader = () => {
-    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
-    let activeStyle = {
-        color: '#ffffff',
-        borderRadius: '40px',
-        boxShadow: '0px 2px 20px 2px rgba(60, 57, 208, 0.3)',
-    };
+    const dispatch = useDispatch();
 
     return (
         <>
             <Attention />
-            <header className='header'>
-                <div className='hamburger' onClick={() => dispatch(toggleHamburgerMenu())}>
+            <HeaderContainer>
+                <Hamburger onClick={() => dispatch(toggleHamburgerMenu())}>
                     <span></span>
                     <span></span>
                     <span></span>
-                </div>
+                </Hamburger>
 
-                <div className='header__logo'>
+                <HeaderLogo>
                     <Link to='/'>
                         <span>Ib</span>SHOP.
                     </Link>
-                </div>
-                <div className='header__catalog'>
-                    <NavLink
-                        to='/catalog'
-                        className='button header__button'
-                        style={({ isActive }) => (isActive ? activeStyle : null)}
-                    >
+                </HeaderLogo>
+
+                <HeaderCatalog>
+                    <StyledButton modifier='primary' onClick={() => navigate('/catalog')}>
                         Catalog
-                    </NavLink>
-                </div>
+                    </StyledButton>
+                </HeaderCatalog>
 
                 <NavBar />
 
                 <CartIcon />
 
                 <UserIcon />
-            </header>
+            </HeaderContainer>
 
             <main>
                 <Outlet />

@@ -1,13 +1,13 @@
 import { formatPrice } from '../../utils/functions/functions';
 
 import { useDispatch } from 'react-redux';
-import { deleteItemFromCart } from '../../utils/reducers/cartSlice/cartSlice';
+import { deleteItemFromCart } from '../../redux/reducers/cartSlice/cartSlice';
 
 import AmountCounter from '../amountCounter/AmountCounter';
 
 import { MdOutlineDeleteForever } from 'react-icons/md';
 
-import './checkoutItem.scss';
+import { CheckoutItemContainer, CheckoutItemImg, CheckoutItemRemove } from './style.js';
 
 const CheckoutItem = ({ cartItem }) => {
     const dispatch = useDispatch();
@@ -15,22 +15,22 @@ const CheckoutItem = ({ cartItem }) => {
     const { name, imageUrl, price, quantity, discount } = cartItem;
 
     return (
-        <li className='checkout-item'>
-            <div className='checkout-item__img'>
+        <CheckoutItemContainer>
+            <CheckoutItemImg className='checkout-item__img'>
                 <img src={imageUrl} alt={name} />
-            </div>
+            </CheckoutItemImg>
 
-            <div className='checkout-item__name'>{name}</div>
-            <div className='checkout-item__price'>
+            <div>{name}</div>
+            <span>
                 {quantity} x {formatPrice(price, discount).toFixed(2)} $
-            </div>
+            </span>
 
             <AmountCounter cartItem={cartItem} />
 
-            <div className='checkout-item__remove'>
+            <CheckoutItemRemove>
                 <MdOutlineDeleteForever onClick={() => dispatch(deleteItemFromCart(cartItem))} />
-            </div>
-        </li>
+            </CheckoutItemRemove>
+        </CheckoutItemContainer>
     );
 };
 

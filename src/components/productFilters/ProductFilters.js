@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { filterChanged } from '../../utils/reducers/filtersSlice/filtersSlice';
+import { filterChanged } from '../../redux/reducers/filtersSlice/filtersSlice';
 
-import './productFilters.scss';
+import {FIltersContainer, FiltersList, FilterItem} from './style.js';
 
 const ProductFilters = () => {
     const { filters, activeFilter } = useSelector((state) => state.filters);
@@ -11,16 +11,12 @@ const ProductFilters = () => {
         return arr.map(({ label, filterName }) => {
             return (
                 <li key={filterName}>
-                    <button
-                        className={
-                            activeFilter === filterName
-                                ? 'filters__item filters__item_active'
-                                : 'filters__item'
-                        }
+                    <FilterItem
+                        isActive={activeFilter === filterName}
                         onClick={() => dispatch(filterChanged(filterName))}
                     >
                         {label}
-                    </button>
+                    </FilterItem>
                 </li>
             );
         });
@@ -29,9 +25,9 @@ const ProductFilters = () => {
     const elements = renderFilters(filters);
 
     return (
-        <div className='filters__container'>
-            <ul className='filters__list'>{elements}</ul>
-        </div>
+        <FIltersContainer>
+            <FiltersList>{elements}</FiltersList>
+        </FIltersContainer>
     );
 };
 

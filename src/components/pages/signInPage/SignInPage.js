@@ -12,7 +12,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import FormInput from '../../formInput/FormInput';
 import { BsGoogle } from 'react-icons/bs';
 
-import './signInPage.scss';
+import { Wrapper, FormContainer, SuggestionLink, Error } from '../../../styles/FormStyles';
+import { StyledButton } from '../../../styles/Buttons';
+import { Title } from '../../../styles/Titles';
 
 const SignInPage = () => {
     const navigate = useNavigate();
@@ -55,10 +57,12 @@ const SignInPage = () => {
     const error = errorMessage(errorType);
 
     return (
-        <div className='sign-in'>
-            <form className='sign-in__form' onSubmit={handleSubmit(onSubmitForm)}>
-                <h2 className='title title_medium title_center sign-in__title'>Sign in now</h2>
-                <p className='error-message'>{errorType && error}</p>
+        <Wrapper>
+            <FormContainer onSubmit={handleSubmit(onSubmitForm)}>
+                <Title fz='medium' centered>
+                    Sign in now
+                </Title>
+                <Error>{errorType && error}</Error>
 
                 <FormInput id='email' label='Email' type='email' name='email' required />
 
@@ -70,23 +74,23 @@ const SignInPage = () => {
                     required
                 />
 
-                <button className='button button_auth' type='submit'>
+                <StyledButton modifier='auth' type='submit'>
                     Sign In
-                </button>
+                </StyledButton>
 
-                <h3 className='title title_small title_center sign-in__suggestion'>
+                <Title fz='semi' centered>
                     or sign in with google...
-                </h3>
+                </Title>
 
-                <button className='button button_auth' type='button' onClick={signInWithGoogle}>
+                <StyledButton modifier='auth' type='button' onClick={signInWithGoogle}>
                     Sign In With Google <BsGoogle />
-                </button>
+                </StyledButton>
 
-                <div className='sign-in__join'>
+                <SuggestionLink>
                     Don't have an account? <Link to='/authentication/join'>Join now</Link>
-                </div>
-            </form>
-        </div>
+                </SuggestionLink>
+            </FormContainer>
+        </Wrapper>
     );
 };
 

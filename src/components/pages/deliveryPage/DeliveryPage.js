@@ -1,9 +1,11 @@
 import InfoBlock from '../../infoBlock/InfoBlock';
 import InfoBlocksList from '../../infoBlocksList/InfoBlocksList';
+import ConsultationForm from '../../consultationForm/ConsultationForm';
 
 import { FaTruck, FaCarSide } from 'react-icons/fa';
 import { IoIosAirplane } from 'react-icons/io';
-import ConsultationForm from '../../consultationForm/ConsultationForm';
+
+import { Title } from '../../../styles/Titles';
 
 const infoBlockData = [
     {
@@ -29,7 +31,9 @@ const infoBlockData = [
 const DeliveryPage = () => {
     return (
         <section className='delivery'>
-            <h2 className='title title_center'>Terms of delivery and pickup</h2>
+            <Title fz='large' centered>
+                Terms of delivery and pickup
+            </Title>
             <InfoBlocksList>
                 {infoBlockData.map((info, index) => {
                     return <InfoBlock key={info.id} info={info} index={index + 1} />;

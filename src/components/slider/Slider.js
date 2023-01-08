@@ -4,7 +4,7 @@ import SliderDots from '../sliderDots/SliderDots';
 
 import { AiFillCaretLeft, AiFillCaretRight } from 'react-icons/ai';
 
-import './slider.scss';
+import { SliderContainer, SliderWrapper, SliderArrow , SlideImg} from './style.js';
 
 const Slider = () => {
     const [slideIndex, setSlideIndex] = useState(0);
@@ -19,7 +19,7 @@ const Slider = () => {
 
     const nextSlide = () => {
         if (slideIndex !== imgArr.length - 1) {
-            setSlideIndex(prevState => prevState + 1);
+            setSlideIndex((prevState) => prevState + 1);
         }
 
         if (slideIndex === imgArr.length - 1) {
@@ -29,7 +29,7 @@ const Slider = () => {
 
     const prevSlide = () => {
         if (slideIndex !== 0) {
-            setSlideIndex(prevState => prevState - 1);
+            setSlideIndex((prevState) => prevState - 1);
         }
 
         if (slideIndex === 0) {
@@ -49,30 +49,23 @@ const Slider = () => {
     ];
 
     return (
-        <div className='slider'>
-            <div className='slider__arrow slider__arrow_left' onClick={prevSlide}>
+        <SliderContainer>
+            <SliderArrow direction='left' onClick={prevSlide}>
                 <AiFillCaretLeft />
-            </div>
+            </SliderArrow>
 
-            <div className='slider__wrapper'>
+            <SliderWrapper>
                 {imgArr.map((imageSrc, index) => {
-                    return (
-                        <img
-                            key={index}
-                            src={imageSrc}
-                            alt='slide'
-                            style={{ transform: `translate(${slideIndex * -100}%)` }}
-                        />
-                    );
+                    return <SlideImg slideIndex={slideIndex} key={index} src={imageSrc} alt='slide' />;
                 })}
-            </div>
+            </SliderWrapper>
 
-            <div className='slider__arrow slider__arrow_right' onClick={nextSlide}>
+            <SliderArrow direction='right' onClick={nextSlide}>
                 <AiFillCaretRight />
-            </div>
+            </SliderArrow>
 
             <SliderDots imgArr={imgArr} onChangeDot={onChangeDot} slideIndex={slideIndex} />
-        </div>
+        </SliderContainer>
     );
 };
 

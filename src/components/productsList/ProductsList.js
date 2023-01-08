@@ -6,13 +6,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
     categoriesMapSelector,
     fetchCategories,
-} from '../../utils/reducers/categoriesSlice/categoriesSlice';
+} from '../../redux/reducers/categoriesSlice/categoriesSlice';
 
 import ProductCard from '../productCard/ProductCard';
 import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
 
-import './productsList.scss';
+import { ListContainer } from './style.js';
 
 const ProductsList = ({ category }) => {
     const { categoriesLoadingStatus } = useSelector((state) => state.categories);
@@ -78,7 +78,7 @@ const ProductsList = ({ category }) => {
 
     const elements = renderProducts(sortProducts(categories[category]));
 
-    return <ul className='products-list'>{elements}</ul>;
+    return <ListContainer>{elements}</ListContainer>;
 };
 
 export default ProductsList;

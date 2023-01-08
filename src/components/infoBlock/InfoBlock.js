@@ -1,17 +1,19 @@
-import './infoBlock.scss';
+import { InfoBlockContainer, InfoBlockTitle, InfoBlockText, InfoBlockNumber } from './style.js';
 
 const InfoBlock = ({ info, index }) => {
     const { title, text, icon } = info;
 
     return (
-        <li className='info-block'>
-            <div className='info-block__number'>{index < 10 ? `0${index}` : `${index}`}</div>
-            <div className='info-block__title'>
+        <InfoBlockContainer>
+            <InfoBlockNumber>{index < 10 ? `0${index}` : `${index}`}</InfoBlockNumber>
+
+            <InfoBlockTitle>
                 {icon ? <span>{icon}</span> : null}
                 {title}
-            </div>
-            <div className='info-block__text'>{text}</div>
-        </li>
+            </InfoBlockTitle>
+
+            <InfoBlockText>{text}</InfoBlockText>
+        </InfoBlockContainer>
     );
 };
 

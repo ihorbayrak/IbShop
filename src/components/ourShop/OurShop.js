@@ -1,72 +1,89 @@
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { AiOutlineCar } from 'react-icons/ai';
 import { BiCoinStack } from 'react-icons/bi';
 import { MdProductionQuantityLimits, MdOutlineHighQuality } from 'react-icons/md';
 
-import './ourShop.scss';
+import {
+    OurShopSection,
+    OurShopInfo,
+    OurShopDescr,
+    OurShopQualities,
+    OurShopBlock,
+    OurShopImg,
+} from './style.js';
+import { StyledButton } from '../../styles/Buttons.js';
+import { Title } from '../../styles/Titles';
+
+const data = [
+    {
+        id: 1,
+        icon: <AiOutlineCar />,
+        title: 'Pickup and shipments',
+        text: 'Having a company store, we provide the opportunity to carry out self-delivery.',
+    },
+    {
+        id: 2,
+        icon: <BiCoinStack />,
+        title: 'Best prices',
+        text: 'We are a direct importer and manufacturer.',
+    },
+    {
+        id: 3,
+        icon: <MdProductionQuantityLimits />,
+        title: 'Original products',
+        text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis, nihil nam quaerat ducimus dignissimos error sequi et exercitationem voluptatem soluta ad magni rem modi provident velit totam? Esse, voluptas ut!',
+    },
+    {
+        id: 4,
+        icon: <MdOutlineHighQuality />,
+        title: 'High quality',
+        text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis, nihil nam quaerat ducimus dignissimos error sequi et exercitationem voluptatem soluta ad magni rem modi provident velit totam? Esse, voluptas ut!',
+    },
+];
 
 const OurShop = () => {
-    const data = [
-        {
-            id: 1,
-            icon: <AiOutlineCar />,
-            title: 'Pickup and shipments',
-            text: 'Having a company store, we provide the opportunity to carry out self-delivery.',
-        },
-        {
-            id: 2,
-            icon: <BiCoinStack />,
-            title: 'Best prices',
-            text: 'We are a direct importer and manufacturer.',
-        },
-        {
-            id: 3,
-            icon: <MdProductionQuantityLimits />,
-            title: 'Original products',
-            text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis, nihil nam quaerat ducimus dignissimos error sequi et exercitationem voluptatem soluta ad magni rem modi provident velit totam? Esse, voluptas ut!',
-        },
-        {
-            id: 4,
-            icon: <MdOutlineHighQuality />,
-            title: 'High quality',
-            text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis, nihil nam quaerat ducimus dignissimos error sequi et exercitationem voluptatem soluta ad magni rem modi provident velit totam? Esse, voluptas ut!',
-        },
-    ];
+    const navigate = useNavigate();
 
     return (
-        <section className='our-shop'>
-            <div className='our-shop__info'>
-                <h1 className='title title_big our-shop__title'>
+        <OurShopSection>
+            <OurShopInfo>
+                <Title as='h1' fz='large'>
                     our store offers the best quality
-                </h1>
-                <div className='our-shop__descr'>
-                    In stock with delivery in 2 hours and payment upon receipt
-                </div>
+                </Title>
 
-                <div className='our-shop__qualities'>
+                <OurShopDescr>
+                    In stock with delivery in 2 hours and payment upon receipt
+                </OurShopDescr>
+
+                <OurShopQualities>
                     {data.map(({ id, icon, title, text }) => {
                         return (
-                            <div key={id} className='our-shop__block'>
-                                <div className='our-shop__block-icon'>{icon}</div>
-                                <div className='our-shop__block-content'>
-                                    <div className='our-shop__block-head'>{title}</div>
-                                    <div className='our-shop__block-body'>{text}</div>
+                            <OurShopBlock key={id}>
+                                <div className='icon'>{icon}</div>
+                                <div className='content'>
+                                    <div className='head'>{title}</div>
+                                    <div className='body'>{text}</div>
                                 </div>
-                            </div>
+                            </OurShopBlock>
                         );
                     })}
-                </div>
+                </OurShopQualities>
 
-                <Link to='/catalog' className='button our-shop__button'>
+                <StyledButton
+                    as='a'
+                    onClick={() => navigate('/catalog')}
+                    modifier='primary'
+                    btnMargin='50px auto'
+                >
                     Go to catalog
-                </Link>
-            </div>
+                </StyledButton>
+            </OurShopInfo>
 
-            <div className='our-shop__img'>
+            <OurShopImg>
                 <img src='https://i.ibb.co/ZYW3VTp/brown-brim.png' alt='Girl with hat' />
-            </div>
-        </section>
+            </OurShopImg>
+        </OurShopSection>
     );
 };
 

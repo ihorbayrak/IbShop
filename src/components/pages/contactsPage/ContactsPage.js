@@ -7,6 +7,8 @@ import InfoBlocksList from '../../infoBlocksList/InfoBlocksList';
 import { AiOutlineMail, AiOutlinePhone } from 'react-icons/ai';
 import { GoLocation } from 'react-icons/go';
 
+import { Title } from '../../../styles/Titles';
+
 const infoBlockData = [
     {
         id: 1,
@@ -31,7 +33,9 @@ const infoBlockData = [
 const ContactsPage = () => {
     return (
         <section className='contacts'>
-            <h2 className='title title_center'>Our contacts</h2>
+            <Title fz='large' centered>
+                Our contacts
+            </Title>
             <InfoBlocksList>
                 {infoBlockData.map((info, index) => {
                     return <InfoBlock key={info.id} info={info} index={index + 1} />;

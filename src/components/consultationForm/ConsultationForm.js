@@ -1,97 +1,80 @@
 import { useState } from 'react';
 
+import { useForm } from 'react-hook-form';
+
 import FormInput from '../formInput/FormInput';
 import Modal from '../modal/Modal';
 
-import './consultationForm.scss';
+import {
+    ConsultationContainer,
+    ConsultationWrapper,
+    ConsultationFormContainer,
+    ModalGrid,
+} from './style.js';
+import { Title, SubTitle } from '../../styles/Titles';
+import { StyledButton } from '../../styles/Buttons';
 
 import girl from '../../assets/message-girl.png';
 
-const defaultInputValues = {
-    name: '',
-    email: '',
-    message: '',
-};
-
 const ConsultationForm = () => {
-    const [inputValues, setInputValues] = useState(defaultInputValues);
-
-    const { name, email, message } = inputValues;
+    const { handleSubmit, reset } = useForm();
 
     const [modalActive, setModalActive] = useState(false);
 
-    const resetFormFields = () => {
-        setInputValues(defaultInputValues);
-    };
-
-    const handleChange = (e) => {
-        setInputValues({ ...inputValues, [e.target.name]: e.target.value });
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        resetFormFields();
+    const onSubmitForm = (data) => {
+        reset();
 
         setModalActive(false);
     };
 
     return (
-        <div className='consultation'>
-            <div className='consultation__wrapper'>
-                <h3 className='title title_small consultation__title'>Want a consultation?</h3>
-                <div className='subtitle'>Easy and simple</div>
+        <ConsultationContainer>
+            <ConsultationWrapper>
+                <Title fz='semi'>Want a consultation?</Title>
+                <SubTitle>Easy and simple</SubTitle>
 
-                <form className='consultation__form' onSubmit={handleSubmit}>
-                    <FormInput
-                        id='name'
-                        type='text'
-                        label='Your name'
-                        name='name'
-                        onChange={handleChange}
-                        value={name}
-                    />
-                    <FormInput
-                        id='email'
-                        type='email'
-                        label='Your email'
-                        name='email'
-                        onChange={handleChange}
-                        value={email}
-                    />
-                    <button
+                <ConsultationFormContainer onSubmit={handleSubmit(onSubmitForm)}>
+                    <FormInput id='name' type='text' label='Your name' name='name' required />
+                    <FormInput id='email' type='email' label='Your email' name='email' required />
+                    <StyledButton
                         type='button'
-                        className='button consultation__button'
+                        modifier='primary'
+                        btnMargin='30px 0 0 0'
                         onClick={() => setModalActive(true)}
                     >
                         Consultation
-                    </button>
+                    </StyledButton>
 
                     <Modal active={modalActive} setActive={setModalActive}>
-                        <div className='modal__grid'>
+                        <ModalGrid>
                             <div className='modal__wrapper'>
-                                <h3 className='title title_small'>Write your message below</h3>
-                                <div className='subtitle'>Fast and simple</div>
+                                <Title fz='semi'>Write your message below</Title>
+                                <SubTitle>Fast and simple</SubTitle>
+
                                 <FormInput
-                                    id='message'
-                                    name='message'
+                                    id='consultation'
+                                    name='consultation'
                                     type='text'
                                     label='Your message'
-                                    onChange={handleChange}
-                                    value={message}
+                                    required
                                 />
-                                <button className='button consultation__button'>
+
+                                <StyledButton
+                                    modifier='primary'
+                                    btnMargin='30px 0 0 0'
+                                >
                                     Wait for an answer
-                                </button>
+                                </StyledButton>
                             </div>
+
                             <div className='modal__img'>
                                 <img src={girl} alt='girl' />
                             </div>
-                        </div>
+                        </ModalGrid>
                     </Modal>
-                </form>
-            </div>
-        </div>
+                </ConsultationFormContainer>
+            </ConsultationWrapper>
+        </ConsultationContainer>
     );
 };
 

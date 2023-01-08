@@ -1,18 +1,13 @@
-import './modal.scss';
+import { ModalContainer, ModalContent,  ModalClose } from './style.js';
 
 const Modal = ({ active, setActive, children }) => {
     return (
-        <div className={active ? 'modal modal_active' : 'modal'} onClick={() => setActive(false)}>
-            <div
-                className={active ? 'modal__content modal__content_active' : 'modal__content'}
-                onClick={(e) => e.stopPropagation()}
-            >
-                <div className='modal__close' onClick={() => setActive(false)}>
-                    &#10005;
-                </div>
+        <ModalContainer isActive={active} onClick={() => setActive(false)}>
+            <ModalContent isActive={active} onClick={(e) => e.stopPropagation()}>
+                <ModalClose onClick={() => setActive(false)}>&#10005;</ModalClose>
                 {children}
-            </div>
-        </div>
+            </ModalContent>
+        </ModalContainer>
     );
 };
 

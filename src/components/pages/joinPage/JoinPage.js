@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import { Link, useNavigate } from 'react-router-dom';
+
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { yupSchema } from '../../../utils/yupSchema/yupSchema';
@@ -9,10 +11,11 @@ import {
     createUserDocumentFromAuth,
 } from '../../../utils/firebase/firebase';
 
-import { Link, useNavigate } from 'react-router-dom';
 import FormInput from '../../formInput/FormInput';
 
-import './joinPage.scss';
+import { Wrapper, FormContainer, SuggestionLink, Error } from '../../../styles/FormStyles';
+import { StyledButton } from '../../../styles/Buttons';
+import { Title } from '../../../styles/Titles';
 
 const JoinPage = () => {
     const navigate = useNavigate();
@@ -57,19 +60,21 @@ const JoinPage = () => {
     const error = errorMessage(errorType);
 
     return (
-        <div className='join'>
-            <form className='join__form' onSubmit={handleSubmit(onSubmitForm)}>
-                <h2 className='title title_medium title_center sign-in__title'>Join</h2>
-                <p className='error-message'>{errorType && error}</p>
+        <Wrapper>
+            <FormContainer onSubmit={handleSubmit(onSubmitForm)}>
+                <Title fz='medium' centered btnMargin='0 0 0 15px'>
+                    Join
+                </Title>
+                <Error>{errorType && error}</Error>
 
                 <FormInput id='displayName' label='Display Name' type='text' name='displayName' />
-                <p className='join__error'>{errors.displayName && errors.displayName.message}</p>
+                <Error>{errors.displayName && errors.displayName.message}</Error>
 
                 <FormInput id='email' label='Email' type='email' name='email' />
-                <p className='join__error'>{errors.email && errors.email.message}</p>
+                <Error>{errors.email && errors.email.message}</Error>
 
                 <FormInput id='password' label='Password' type='password' name='password' />
-                <p className='join__error'>{errors.password && errors.password.message}</p>
+                <Error>{errors.password && errors.password.message}</Error>
 
                 <FormInput
                     id='confirmPassword'
@@ -77,16 +82,15 @@ const JoinPage = () => {
                     type='password'
                     name='confirmPassword'
                 />
-                <p className='join__error'>
-                    {errors.confirmPassword && errors.confirmPassword.message}
-                </p>
+                <Error>{errors.confirmPassword && errors.confirmPassword.message}</Error>
 
-                <button className='button button_auth'>Sign Up</button>
-                <div className='join__already'>
+                <StyledButton modifier='auth'>Sign Up</StyledButton>
+
+                <SuggestionLink>
                     Already have an account? <Link to='/authentication/sign-in'>Sign in</Link>
-                </div>
-            </form>
-        </div>
+                </SuggestionLink>
+            </FormContainer>
+        </Wrapper>
     );
 };
 

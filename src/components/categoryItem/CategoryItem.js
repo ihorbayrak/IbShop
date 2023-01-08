@@ -1,17 +1,16 @@
-import { Link } from 'react-router-dom';
-
-import './categoryItem.scss';
+import { CategoryItemContainer, StyledLink } from './style.js';
 
 const CategoryItem = ({ category }) => {
     const { title, imageUrl, route } = category;
 
     return (
-        <li className='category-item'>
-            <Link to={route} className='category-item__link'>
+        <CategoryItemContainer>
+            <StyledLink to={route}>
                 <img src={imageUrl} alt={title} />
-                <p className='category-item__title'>{title}</p>
-            </Link>
-        </li>
+
+                <p>{title}</p>
+            </StyledLink>
+        </CategoryItemContainer>
     );
 };
 
